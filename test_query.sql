@@ -119,4 +119,34 @@ union all
     from emr_visit_tech as t
     left join emr_visits v on t.VisitID = v.VisitID
     where v.ExcludeVisit <> -1
+        
+union all
+        
+    select             
+    t.PtID as patient_id,                    
+    t.VisitID as encounter_id,               
+    t.DOSDate as dos,                        
+    t.VisitTechID as ocular_visual_acuity_id,    
+    'OU' as laterality,    --CHANGE                           
+    'CC' as type_code,     --CHANGE              
+    t.WUVA_CC_OU as va,    --CHANGE                      
+    '' as modifier,                         
+    ''  as description,                
+    '' as etrs,                       
+    '' as logmar,                     
+    'Distance' as method,  --CHANGE                   
+    '' as near,                    
+    'N' as pinhole ,       --CHANGE             
+    '' as reason   ,                  
+    '' as ocular_refraction_id, 
+    v.ProviderEMPID as provider_id,
+    'WUVA_CC_OU' as source_field,      --CHANGE 
+    'EMR_Visit_Tech' as source_table,  --CHANGE 
+    t.DOSDate as dos_src,
+    'c54p1s0dpdsci4h0v060' as vh_projection_set_id,    --CHANGE 
+    'Y' as correction   --CHANGE 
+    from emr_visit_tech as t
+    left join emr_visits v on t.VisitID = v.VisitID
+    where v.ExcludeVisit <> -1
+        
     )
